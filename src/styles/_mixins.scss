@@ -1,0 +1,69 @@
+@mixin d-flex
+(
+    $justify-content: center, 
+    $align-items: center,
+    $direction: none,
+    $wrap: none,
+) {
+    display: flex;
+    justify-content: $justify-content;
+    align-items: $align-items;
+    
+    @if $wrap != none {
+        flex-wrap: $wrap;
+    }
+    
+    @if $direction != none {
+        flex-direction: $direction;
+        
+    }
+}
+
+@mixin elm-position
+(
+    $pos: static, 
+    $top: none, 
+    $right: none,
+    $bot: none,
+    $left: none,
+    $z-index: none
+) {
+    position: $pos;
+    top: $top;
+    right: $right;
+    bottom: $bot;
+    left: $left;
+    z-index: $z-index;
+}
+
+@mixin image
+(
+    $width: auto,
+    $height: auto,
+    $fit: cover,
+    $position: center
+) {
+    width: $width;
+    height: $height;
+    object-fit: $fit;
+    object-position: $position;
+}
+
+@mixin button ($bg, $color, $width: auto, $height: auto ) {
+    border: none;
+    border-radius: $border-radius-size;
+    padding: 10px;
+    text-align: center;
+    background: $bg;
+    color: $color;
+    width: $width;
+    height: $height;
+    box-shadow: 2px 3px 5px rgba($color: #000000, $alpha: 0.1);
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        background: darken($bg, 15%);
+        color: darken($color: $color, $amount: 15%);
+    }
+}

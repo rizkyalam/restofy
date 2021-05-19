@@ -1,0 +1,56 @@
+$font-content-color: #F9FAFB;
+$bg-content: #111827;
+$font-paragraph-size-content: 2.7rem;
+$font-header-size-content: 1.8rem;
+
+.jumbotron {
+    height: 90vh;
+    @include elm-position(relative);
+
+    img {
+        @include image(100%, 100%);        
+    }
+
+    .content {
+        color: $font-content-color;
+        text-align: center;
+        
+        @media screen and (min-width: 768px) {
+            @include elm-position(absolute, $top: 50%, $left: 50%);
+            background: rgba($color: $bg-content, $alpha: 0.5);
+            transform: translate(-50%, -50%);
+            width: 70%;
+            padding: 1rem;
+        }
+
+        @media screen and (max-width: 768px) {
+            @include elm-position(absolute, 0, 0, 0, 0);
+            background: rgba($color: $bg-content, $alpha: 0.4);
+            display: grid;
+            place-items: center;
+            place-content: center;
+            width: 100%;
+            padding: 1rem 3rem;
+        }
+
+    }
+    
+    h1 {
+        font-size: $font-header-size-content;
+        margin-bottom: 1.2rem;
+        text-transform: uppercase;
+        font-weight: 600;
+
+        @media screen and (max-width: 768px) {
+            font-size: $font-header-size-content - 0.5rem;
+        }
+    }
+
+    p {
+        font-size: $font-paragraph-size-content;
+        
+        @media screen and (max-width: 768px) {
+            font-size: $font-paragraph-size-content - 0.5rem;
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "@styles": ["src/styles"],
+            "@scripts": ["src/scripts"],
+            "@templates": ["src/templates"],
+            "@public": ["src/public"],
+            "@databases": ["src/databases"]
+        }
+    }
+}

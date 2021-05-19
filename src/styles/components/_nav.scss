@@ -1,0 +1,92 @@
+/**
+ * Styling Component for Navigation
+ */
+$font-logo-size: 1.7rem;
+$font-menu-color: #4B5563;
+$nav-bg-color: white;
+
+nav {
+    @include d-flex(space-between, none);
+    @include elm-position(sticky, 0, 0, $left: 0, $z-index: 1);
+    padding: 1.2rem 2.3rem;
+    box-shadow: 0px 5px 16px rgba($color: #4B5563, $alpha: 0.05);
+    background: $nav-bg-color;
+    height: 70px;
+    width: 100%;
+    overflow-y: hidden;
+    transition: height 0.3s ease-out;
+    
+    // button menu activated
+    &.menu-md-active {
+        height: 240px;
+    }
+
+    .logo {
+        font-size: $font-logo-size;
+        color: $primary-color;
+    }
+
+    // menu navigation
+    ul {        
+        display: grid;
+        align-items: center;
+        
+        // for large devices 768px screen and up (desktop)
+        &.lg-screen {
+            grid-template-columns: repeat(4, 1fr);
+            column-gap: 25px;
+
+            li {
+                text-align: center;
+            }
+        }
+
+        // for medium and small devices screen up to 768px (mobile and tablet)
+        &.md-screen {
+            display: grid;
+            grid-template-rows: repeat(4, 1fr);
+            row-gap: 25px;
+            @include elm-position(absolute, 5rem);            
+        }
+        
+        &.menu-list-active {
+            li {
+                display: inline-block;
+            }    
+        }
+
+        li {
+            @media screen and (max-width: 768px) {
+                display: none;
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: $font-menu-color;
+            
+            &:hover,
+            &:focus {
+                color: $primary-color;
+            }
+        }
+    }
+    
+    #menu-btn {
+        display: none;
+        cursor: pointer;
+        margin-top: 0.4rem;
+        color: $font-menu-color;
+        height: 100%;
+
+        @media screen and (max-width: 768px) {
+            @include d-flex($align-items: none);
+            height: 15px;
+        }
+
+        &:hover,
+        &:focus {
+            color: $primary-color;
+        }        
+    }
+}

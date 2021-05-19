@@ -1,0 +1,72 @@
+$font-card-text-color: #4B5563;
+
+.explore {
+    width: 100%;
+    padding: 4rem 2rem;
+
+    h2 {
+        text-align: center;
+        color: $primary-color;        
+    }
+
+    .explore-list {
+        margin-top: 2rem;
+        @include d-flex($align-items: stretch, $wrap: wrap);
+    }
+    
+    .list-card {
+        border-radius: $border-radius-size;
+        box-shadow: 7px 5px 10px rgba($color: #4B5563, $alpha: 0.08);
+        width: 20rem;
+        margin: 0 2rem;
+        overflow: hidden;
+        margin-bottom: 2rem;
+
+        img {
+            @include image($width: 100%, $height: 15rem);
+        }
+
+        &-body {
+            padding: 1.2rem;
+            display: grid;
+            row-gap: 1rem;
+        }
+
+        &-title {
+            color: $primary-color;
+        }
+
+        &-location {
+            color: $info-color;
+
+            span {
+                margin-left: 0.5rem;
+            }
+        }
+
+        &-rating {
+            color: $warning-color;
+
+            span {
+                margin-left: 0.5rem;
+            }
+        }
+
+        &-text {
+            color: $font-card-text-color;
+            font-weight: 400;
+            max-height: 4rem;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }    
+
+    &-more {
+        @include d-flex();
+        
+        // button for load more list card
+        &--btn {
+            @include button($primary-color, white);
+        }
+    }
+}
