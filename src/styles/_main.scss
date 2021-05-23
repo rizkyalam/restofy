@@ -72,8 +72,14 @@ table {
 	border-spacing: 0;
 }
 
+a {
+	min-width: 44px;
+	min-height: 44px;
+	@include d-flex();
+}
+
 a#skip-content {
-	@include elm-position(fixed, $top: -40px, $left: 0);
+	@include elm-position(fixed, $top: -60px, $left: 0);
 	@include button($danger-color, white);
 	text-decoration: none;
 	z-index: 2;

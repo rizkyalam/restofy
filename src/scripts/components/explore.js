@@ -20,7 +20,7 @@ const elmListCard = (data) => {
             <img src="${data.pictureId}" alt="${data.name} from ${data.city}">
         </div>
         <div class="list-card-body">
-            <h3 class="list-card-title">${data.name}</h3>
+            <a href="#" class="list-card-title">${data.name}</a>
             <h4 class="list-card-location">
                 <i class="fas fa-map-marker-alt"></i>
                 <span>${data.city}</span>

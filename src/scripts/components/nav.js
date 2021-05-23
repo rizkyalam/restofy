@@ -52,18 +52,18 @@ const menuBtn = () => {
 const screenWidth = () => {
     const browserWidth = window.innerWidth;        
         
-    if (browserWidth < 768) {
+    if (browserWidth <= 768) {
         menuScreen('medium')
-    } else if (browserWidth >= 768) {        
+    } else if (browserWidth >= 769) {        
         menuScreen('large')        
     }
 
     window.addEventListener('resize', function() {
         const clientWidth = document.body.clientWidth;
         
-        if (clientWidth < 768) {
+        if (clientWidth <= 768) {
             menuScreen('medium');
-        } else if (clientWidth >= 768) {
+        } else if (clientWidth >= 769) {
             menuScreen('large');
         }
     })    

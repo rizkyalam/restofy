@@ -34,6 +34,9 @@ $font-card-text-color: #4B5563;
 
         &-title {
             color: $primary-color;
+            @include d-flex(flex-start);
+            text-decoration: none;
+            font-weight: 500;
         }
 
         &-location {

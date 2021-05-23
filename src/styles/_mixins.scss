@@ -49,7 +49,7 @@
     object-position: $position;
 }
 
-@mixin button ($bg, $color, $width: auto, $height: auto ) {
+@mixin button ($bg, $color, $width: auto) {
     border: none;
     border-radius: $border-radius-size;
     padding: 10px;
@@ -57,7 +57,7 @@
     background: $bg;
     color: $color;
     width: $width;
-    height: $height;
+    min-height: 44px;
     box-shadow: 2px 3px 5px rgba($color: #000000, $alpha: 0.1);
     cursor: pointer;
 
