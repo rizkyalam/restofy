@@ -10,6 +10,7 @@ $danger-color: darken($primary-color, 10%);
 $warning-color: #FCD34D;
 $info-color: #60A5FA;
 $border-radius-size: 0.125rem;
+$font-card-text-color: #4B5563;
 
 /* 
 	Reset CSS
@@ -51,6 +52,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
     background: $bg-color;
+	overflow-x: hidden;
 }
 
 ol, ul {
@@ -82,10 +84,14 @@ a#skip-content {
 	@include elm-position(fixed, $top: -60px, $left: 0);
 	@include button($danger-color, white);
 	text-decoration: none;
-	z-index: 2;
+	z-index: 11;
 
 	// override focus from button mixin
 	&:focus {
 		top: 0;
 	}
+}
+
+#maincontent {
+	width: 100%;
 }

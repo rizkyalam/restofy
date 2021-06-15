@@ -1,0 +1,106 @@
+.review {
+    padding: 4rem 2rem 0;
+    @include d-flex($direction: column);
+
+    h2 {
+        color: $primary-color;
+    }
+
+    &-list {
+        margin-top: 2rem;
+        @include d-flex($align-items: stretch, $wrap: wrap);
+    }
+
+    &-card {
+        @include card();
+        margin: 0 2rem 3rem;
+        color: $font-card-text-color;
+
+        &-body {
+            padding: 1.2rem;
+            display: grid;
+            row-gap: 1rem;
+            position: relative;
+            text-align: center;
+        }
+
+        h4 {
+            color: $info-color;
+        }
+
+        p {
+            width: 20rem;
+        }
+    }
+
+    h3 {
+        color: $primary-color;
+        margin-top: 2rem;
+    }
+
+    &-rate {
+        padding: 2rem;
+        width: 40%;
+
+        @media screen and (max-width: 992px) {
+            width: 80%;
+        }
+
+        // @media screen and (max-width: 768px) {
+        //     width: 80%;
+        // }
+
+        @media screen and (max-width: 576px) {
+            width: 100%;
+        }
+
+        label {
+            color: $reservation-text-color;
+            text-align: center;
+
+            .important-form {
+                color: $danger-color;
+            }
+        }
+
+        &--btn {
+            @include button($primary-color, white);
+            text-align: center;            
+        }
+    }
+
+    .form-group {
+        width: 100%;
+        display: grid;
+        grid-template-rows: repeat(2, minmax(1rem, 2rem));
+        margin-bottom: 2rem;
+    }
+
+    .form-control {
+        border-radius: $border-radius-size;
+        min-width: 44px;
+        min-height: 44px;
+        border: 1px solid #E5E7EB;
+        padding: 0.2rem 0.6rem;
+        color: $reservation-text-color;
+
+        &:focus {
+            outline: none;
+            border: 1px solid $info-color;
+        }
+    }
+
+    .info-rate {
+        text-align: center;
+        margin-bottom: 1rem;
+
+        &.success {
+            color: $success-color;
+        }
+
+        &.warning {
+            color: $danger-color;
+        }
+    }
+    
+}

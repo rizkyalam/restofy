@@ -1,6 +1,6 @@
 $font-card-text-color: #4B5563;
 
-.explore {
+.favorite {
     width: 100%;
     padding: 4rem 2rem;
 
@@ -9,7 +9,7 @@ $font-card-text-color: #4B5563;
         color: $primary-color;        
     }
 
-    .explore-list {
+    &-list {
         margin-top: 2rem;
         @include d-flex($align-items: stretch, $wrap: wrap);
     }
@@ -77,15 +77,6 @@ $font-card-text-color: #4B5563;
                     color: darken($info-color, 30%);
                 }
             }
-        }
-    }    
-
-    &-more {
-        @include d-flex();
-        
-        // button for load more list card
-        &--btn {
-            @include button($primary-color, white);
         }
     }
 }

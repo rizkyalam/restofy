@@ -1,0 +1,27 @@
+.loader-page {
+    padding: 4rem 2rem;
+    @include d-flex($direction: column);
+
+    h2 {
+        color: $primary-color;
+        margin-bottom: 2rem;
+    }
+
+    .loader-circle {
+        width: 5rem;
+        height: 5rem;
+        border: 10px solid #E5E7EB;
+        animation: load 0.7s linear infinite;
+        border-radius: 50%;
+        border-top: 10px solid $primary-color;
+    
+        @keyframes load {
+            from {
+                transform: rotate(0deg)
+            }
+            to {
+                transform: rotate(360deg)
+            }
+        }
+    }    
+}

@@ -67,3 +67,9 @@
         color: darken($color: $color, $amount: 15%);
     }
 }
+
+@mixin card () {
+    border-radius: $border-radius-size;
+    box-shadow: 7px 5px 10px rgba($color: #6B7280, $alpha: 0.08);
+    color: $font-card-text-color;
+}

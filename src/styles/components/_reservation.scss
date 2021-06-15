@@ -40,7 +40,6 @@ $reservation-text-color: #4B5563;
 
     .form-group {
         width: 100%;
-        display: flex;        
         display: grid;
         grid-template-rows: repeat(2, minmax(1rem, 2rem));
         margin-bottom: 2rem;
@@ -65,10 +64,6 @@ $reservation-text-color: #4B5563;
                 outline: none;
                 border: 1px solid $info-color;
             }
-        }
-
-        textarea {
-            resize: none;
         }
 
         .reservation--btn {

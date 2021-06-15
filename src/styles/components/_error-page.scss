@@ -1,0 +1,13 @@
+.error-page {
+    padding: 4rem 2rem;
+    @include d-flex($direction: column);
+
+    h2 {
+        color: $primary-color;
+        margin-bottom: 1rem;
+    }
+
+    img {
+        @include image(25rem, 25rem, contain);
+    }
+}

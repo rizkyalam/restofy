@@ -1,0 +1,199 @@
+$description-color: #4B5563;
+$border-color: #9CA3AF;
+
+.detail {    
+    padding: 4rem 0;
+    
+    h2 {
+        text-align: center;
+        color: $primary-color;
+    }
+
+    &-card {
+        margin: 2rem auto;
+        width: 60%;
+        min-height: 25rem;
+        border-radius: $border-radius-size;
+        box-shadow: 7px 5px 10px rgba($color: #4B5563, $alpha: 0.08);
+        display: flex;
+
+        @media screen and (max-width: 992px) {
+            width: 80%;
+        }
+
+        @media screen and (max-width: 576px) {
+            flex-direction: column;
+        }
+        
+        &-location,
+        &-rating,
+        &-food,
+        &-drink {
+            margin-bottom: 1.5rem;
+            display: grid;
+            grid-template-columns: 2rem 1fr;
+        }
+
+        &-name {
+            color: $primary-color;
+            margin-bottom: 1.5rem;
+        }
+
+        &-location {
+            color: $info-color;            
+        }
+
+        &-rating {
+            color: $warning-color;
+        }
+
+        &-food {
+            color: $danger-color;
+        }
+
+        &-drink {
+            color: $success-color;
+        }
+
+        &-categories {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            color: $description-color;
+            margin-bottom: 0.6rem;
+        }
+    }
+
+    &-card-img {
+        width: 40%;
+
+        @media screen and (max-width: 576px) {
+            width: 100%;    
+        }
+
+        img {
+            @include image(100%, 100%);
+
+            @media screen and (max-width: 576px) {
+                @include image(100%, 15rem);
+            }
+        }
+    }
+
+    &-card-body {
+        width: 60%;
+        position: relative;
+        padding: 2rem 3rem;
+        overflow: hidden;
+
+        @media screen and (max-width: 576px) {
+            width: 100%;
+            padding: 2rem 1.5rem;
+        }
+    }
+
+    .detail-card-collapse{
+        color: $description-color;            
+        @include d-flex(space-between);
+        border-bottom: 1px solid $border-color;
+        margin-bottom: 5rem;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+            color: darken($description-color, 30%);
+            border-color: darken($border-color, 30%);
+        }
+    }
+
+    .detail-card-description {
+        color: $description-color;
+        transition: height 0.3s;
+        @include elm-position(absolute, $right: 0, $left: 0, $bot: 0, $z-index: 1);
+        display: none;
+        transform: translateY(10rem);
+        height: 0%;
+        background: $bg-color;
+        padding: 2rem 3rem;
+        overflow-y: auto;
+
+        &-header {
+            @include d-flex(space-between);
+        }
+
+        h4 {
+            color: $primary-color;
+        }
+
+        .detail-card-collapse-close {
+            color: $danger-color;
+            font-size: 22px;
+            display: none;
+            text-align: center;
+            @include d-flex();
+            padding: 15px 0;
+            text-decoration: none;
+
+            &:hover,
+            &:focus {
+                color: darken($danger-color, 15%);
+            }
+        }
+
+        p {
+            padding-bottom: 2rem;
+            word-spacing: 0.375rem;
+            line-height: 1.375rem;
+        }
+
+        @media screen and (max-width: 576px) {
+            width: 100%;
+            padding: 2rem 1.5rem;
+        }
+
+        &.active {
+            transform: translateY(0);
+            height: 100%;
+            overflow-y: auto;
+        }
+    }
+
+    // button of add or remove to favorite
+    .detail-favorite {
+
+        &.insert {
+            @include button($success-color, white);
+            @include elm-position(absolute, $right: 3rem, $bot: 2rem);
+
+            @media screen and (max-width: 576px) {
+                right: 1.5rem;
+            }
+        }
+
+        &.delete {
+            @include button($danger-color, white);
+            @include elm-position(absolute, $right: 3rem, $bot: 2rem);
+
+            @media screen and (max-width: 576px) {
+                right: 1.5rem;
+            }
+        }
+    }
+
+    .explore-restaurant {
+        margin: 0 auto;
+        width: 15rem;
+        
+        a {
+            text-decoration: underline;
+            @include d-flex();
+            height: 44px;
+            width: auto;
+            color: $info-color;
+            &:hover,
+            &:focus {
+                color: darken($info-color, 30%);
+            }
+        }
+
+    }
+}

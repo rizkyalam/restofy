@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#EF4444"/>
     <title>Restofy</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="/android/android-launchericon-192-192.png">
+    <link rel="icon" href="favicon.png">
 </head>
 <body>
     <a href="#maincontent" id="skip-content">Skip To Content</a>
@@ -13,12 +17,12 @@
         <div class="logo">
             Restofy
         </div>
-        <a href="#" id="menu-btn">
+        <a href="#" id="menu-btn" aria-label="navigation-menu">
             <i class="fas fa-align-right"></i>
         </a>
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="#">Favorite</a></li>
+            <li><a href="#/">Home</a></li>
+            <li><a href="#/favorite">Favorite</a></li>
             <li><a href="#reservation">Reservations</a></li>
             <li><a href="https://github.com/rizkyalam">About Us</a></li>
         </ul>
@@ -36,100 +40,11 @@
     <!-- /Jumbotron -->
 
     <!-- Main Content -->
-    <main id="maincontent">
-        <!-- Explore Restaurant -->
-        <section class="explore">
-            <h2>Explore Restaurant</h2>
-            
-            <!-- list of restaurant -->
-            <div class="explore-list"></div>
-            
-            <div class="explore-more">
-                <button class="explore-more--btn">Load More</button>
-            </div>
-            <!-- /list of restaurant -->
-            
-        </section>
-        <!-- /Explore Restaurant -->
-
-        <!-- Reservations -->
-        <section class="reservation" id="reservation">
-            <div class="reservation-header">
-                <h2>Reservations</h2>
-                <p>You can reserve a table from our website. We recommended making reservations at least 5 days in advance.</p>
-            </div>
-            <div class="reservation-body">
-                <form action="">
-                    <!-- Fullname Form  -->
-                    <div class="form-group">
-                        <label for="full-name">
-                            Full Name 
-                            <span class="important-form">*</span>
-                        </label>
-                        <input type="text" class="form-control" id="full-name" required>
-                    </div>
-                    <!-- /Fullname Form  -->
-
-                    <!-- Phone number Form  -->
-                    <div class="form-group">
-                        <label for="phone">
-                            Phone Number
-                            <span class="important-form">*</span>
-                        </label>
-                        <input type="text" class="form-control" id="phone" required>
-                    </div>
-                    <!-- /Phone number Form  -->
-
-                    <!-- Email Address Form  -->
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" class="form-control" id="email" required>
-                    </div>
-                    <!-- /Email Address Form  -->
-
-                    <!-- Date Form  -->
-                    <div class="form-group">
-                        <label for="date">
-                            Date
-                            <span class="important-form">*</span>
-                        </label>
-                        <input type="date" class="form-control" id="date" required>
-                    </div>
-                    <!-- /Phone number Form  -->
-
-                    <!-- Number of Guests Form  -->
-                    <div class="form-group">
-                        <label for="guest">
-                            Number of Guests
-                            <span class="important-form">*</span>
-                        </label>
-                        <input type="number" class="form-control" id="guest" required>
-                    </div>
-                    <!-- /Number of Guests Form  -->
-
-                    <!-- Comments Form  -->
-                    <div class="form-group">
-                        <label for="comment">Comments</label>
-                        <input type="text" class="form-control" id="comment" required>
-                    </div>
-                    <!-- /Comments Form  -->
-
-                    <!-- Submit -->
-                    <div class="form-group">
-                        <button type="submit" class="reservation--btn">Submit</button>
-                    </div>
-                    <!-- /Submit -->
-                </form>
-            </div>
-        </section>
-        <!-- /Reservations -->
-
-    </main>
+    <main id="maincontent"></main>
     <!-- /Main Content -->
-
+    
     <footer>
         <p>copyright &copy; 2021 - Restofy</p>
     </footer>
-
 </body>
 </html>
