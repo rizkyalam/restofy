@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
-import Home from '@scripts/views/pages/home';
-import Detail from '@scripts/views/pages/detail';
-import Favorite from '@scripts/views/pages/favorite';
+import Home from '../views/pages/home';
+import Detail from '../views/pages/detail';
+import Favorite from '../views/pages/favorite';
 
 /**
  * Create routing url pages

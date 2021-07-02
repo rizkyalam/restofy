@@ -1,6 +1,5 @@
 const navbar = document.querySelector('nav');
 const navMenu = document.querySelector('nav ul');
-const listMenu = navMenu.classList.contains('menu-list-active');
 
 /**
  * navigation menu from each screen
@@ -26,9 +25,11 @@ const menuScreen = (screen) => {
 const menuBtn = () => {
   const button = document.querySelector('#menu-btn');
 
-  button.addEventListener('click', (e) => {
+  button.onclick = (e) => {
     e.preventDefault();
     e.stopPropagation();
+
+    const listMenu = navMenu.classList.contains('menu-list-active');
 
     if (listMenu) {
       setTimeout(() => {
@@ -39,7 +40,7 @@ const menuBtn = () => {
     }
 
     navbar.classList.toggle('menu-md-active');
-  });
+  };
 };
 
 /**
@@ -89,4 +90,4 @@ const loadNav = () => {
   listMenuResize();
 };
 
-export default loadNav();
+export default loadNav;

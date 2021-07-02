@@ -1,20 +1,18 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable import/no-unresolved */
-import UrlParser from '@scripts/routes/url-parser';
-import api from '@scripts/configs/api';
-import config from '@scripts/configs';
-import LoaderPage from '@scripts/views/components/loader-page';
-import dbconfig from '@scripts/configs/idb';
+import UrlParser from '../../../routes/url-parser';
+import api from '../../../configs/api';
+import config from '../../../configs';
+import LoaderPage from '../loader-page';
+import dbconfig from '../../../configs/idb';
+import { restaurant } from '../../../../databases/detail.json';
 
 class Detail extends HTMLElement {
-  constructor() {
-    super();
-    this.id = UrlParser.getUrlId();
-  }
-
   async connectedCallback() {
     try {
-      const data = await api.getDetailData(this.id);
+      this.id = UrlParser.getUrlId();
+      const mode = this.getAttribute('data-mode');
+      const data = mode === 'testing' ? restaurant : await api.getDetailData(this.id);
       this.innerHTML = this.renderElm(data);
       this.showMenus(data, 'foods');
       this.showMenus(data, 'drinks');
@@ -34,21 +32,25 @@ class Detail extends HTMLElement {
       <h2>Detail Restaurant</h2>
       <div class="detail-card">
         <div class="detail-card-img">
-          <img src="${config.apiImgUrlMedium + data.pictureId}" alt="Detail of ${data.pictureId}">
+          <img 
+            class="lazyload" 
+            data-src="${config.apiImgUrlMedium + data.pictureId}" 
+            alt="Detail of ${data.pictureId}"
+          >
         </div>
         <div class="detail-card-body">
           <h3 class="detail-card-name">${data.name}</h3>
           <h4 class="detail-card-location">
-           📌 <span>${data.city}, ${data.address}</span>
+          📌 <span>${data.city}, ${data.address}</span>
           </h4>
           <h4 class="detail-card-rating">
             ⭐ <span>${data.rating}</span>
           </h4>
           <div class="detail-card-food">
-           🍕 <span></span>
+          🍕 <span></span>
           </div>
           <div class="detail-card-drink">
-           ☕ <span></span>
+          ☕ <span></span>
           </div>
           <div class="detail-card-categories">
             Categories: <span></span>
@@ -114,11 +116,9 @@ class Detail extends HTMLElement {
     const dataFavorite = await dbconfig.getFavorite(this.id);
 
     if (dataFavorite) {
-      detailCardBody.appendChild(this.removeFromFavorite(apiData, this.id));
-      // this.innerHTML = this.renderElm(apiData);
+      detailCardBody.appendChild(this.removeFromFavorite(apiData));
     } else {
       detailCardBody.appendChild(this.addToFavorite(apiData));
-      // this.innerHTML = this.renderElm(apiData);
     }
   }
 
@@ -136,29 +136,7 @@ class Detail extends HTMLElement {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-
-      this.innerHTML = '';
-      this.innerHTML += '<loader-page></loader-page>';
-
-      try {
-        dbconfig.putFavorite(data);
-
-        // re-render the element
-        this.innerHTML = '';
-        this.innerHTML += '<alert-favorite data-type="add"></alert-favorite>';
-        this.innerHTML += this.renderElm(data);
-        this.showMenus(data, 'foods');
-        this.showMenus(data, 'drinks');
-        this.favoriteRestaurant(data);
-        this.showCategories(data);
-        this.toggleCategories();
-      } catch {
-        this.innerHTML += '<alert-favorite data-type="failed"></alert-favorite>';
-        LoaderPage.removeLoader();
-        this.innerHTML += '<error-data></error-data>';
-      }
-
-      this.removeAlert();
+      this.reRenderElmAfterClickBtnFavorite('add', data);
     });
 
     return btn;
@@ -172,32 +150,45 @@ class Detail extends HTMLElement {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-
-      this.innerHTML = '';
-      this.innerHTML += '<loader-page></loader-page>';
-
-      try {
-        dbconfig.deleteFavorite(data.id);
-
-        // re-render the element
-        this.innerHTML = '';
-        this.innerHTML += '<alert-favorite data-type="remove"></alert-favorite>';
-        this.innerHTML += this.renderElm(data);
-        this.showMenus(data, 'foods');
-        this.showMenus(data, 'drinks');
-        this.favoriteRestaurant(data);
-        this.showCategories(data);
-        this.toggleCategories();
-      } catch {
-        this.innerHTML += '<alert-favorite data-type="failed"></alert-favorite>';
-        LoaderPage.removeLoader();
-        this.innerHTML += '<error-data></error-data>';
-      }
-
-      this.removeAlert();
+      this.reRenderElmAfterClickBtnFavorite('remove', data);
     });
 
     return btn;
+  }
+
+  reRenderElmAfterClickBtnFavorite(type, data) {
+    this.innerHTML = '';
+    this.innerHTML += '<loader-page></loader-page>';
+
+    try {
+      if (type === 'add') {
+        dbconfig.putFavorite(data);
+      } else if (type === 'remove') {
+        dbconfig.deleteFavorite(data.id);
+      } else {
+        throw new Error('No type !');
+      }
+
+      // re-render the element
+      this.innerHTML = '';
+      if (type === 'add') {
+        this.innerHTML += '<alert-favorite data-type="add"></alert-favorite>';
+      } else if (type === 'remove') {
+        this.innerHTML += '<alert-favorite data-type="remove"></alert-favorite>';
+      }
+      this.innerHTML += this.renderElm(data);
+      this.showMenus(data, 'foods');
+      this.showMenus(data, 'drinks');
+      this.favoriteRestaurant(data);
+      this.showCategories(data);
+      this.toggleCategories();
+    } catch {
+      this.innerHTML += '<alert-favorite data-type="failed"></alert-favorite>';
+      LoaderPage.removeLoader();
+      this.innerHTML += '<error-data></error-data>';
+    }
+
+    this.removeAlert();
   }
 
   removeAlert() {
@@ -215,7 +206,7 @@ class Detail extends HTMLElement {
 
     descriptionOpen.addEventListener('click', (e) => {
       e.preventDefault();
-      // e.stopPropagation();
+      e.stopPropagation();
 
       descriptionCard.style.display = 'block';
 

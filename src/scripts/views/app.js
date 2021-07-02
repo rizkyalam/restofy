@@ -1,18 +1,17 @@
 /* eslint-disable class-methods-use-this */
-/* eslint-disable import/no-unresolved */
-import routes from '@scripts/routes';
-import UrlParser from '@scripts/routes/url-parser';
-import api from '@scripts/configs/api';
-import loadNav from '@scripts/views/components/nav';
-import Explore from '@scripts/views/components/explore';
-import Reservations from '@scripts/views/components/reservations';
-import Detail from '@scripts/views/components/details/detail';
-import LoaderPage from '@scripts/views/components/loader-page';
-import Error404Page from '@scripts/views/components/error-pages/error-404-page';
-import ErrorDataPage from '@scripts/views/components/error-pages/error-data-page';
-import ReviewDetail from '@scripts/views/components/details/review';
-import Alert from '@scripts/views/components/alert';
-import Favorite from '@scripts/views/components/favorite';
+import routes from '../routes';
+import UrlParser from '../routes/url-parser';
+import api from '../configs/api';
+import loadNav from './components/nav';
+import Explore from './components/explore';
+import Reservations from './components/reservations';
+import Detail from './components/details/detail';
+import LoaderPage from './components/loader-page';
+import Error404Page from './components/error-pages/error-404-page';
+import ErrorDataPage from './components/error-pages/error-data-page';
+import ReviewDetail from './components/details/review';
+import Alert from './components/alert';
+import Favorite from './components/favorite';
 
 customElements.define('explore-restaurant', Explore);
 customElements.define('form-reservations', Reservations);

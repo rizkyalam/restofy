@@ -1,9 +1,12 @@
-/* eslint-disable import/no-extraneous-dependencies */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
+const ImageminWebpackPlugin = require('imagemin-webpack-plugin').default;
+const ImageminMozjpeg = require('imagemin-mozjpeg');
+const ImageminPngquant = require('imagemin-pngquant');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   entry: path.resolve(__dirname, 'src/scripts/index.js'),
@@ -36,6 +39,9 @@ module.exports = {
         {
           from: path.resolve(__dirname, 'src/public/'),
           to: path.resolve(__dirname, 'dist/'),
+          globOptions: {
+            ignore: ['/images/**'],
+          },
         },
       ],
     }),
@@ -45,14 +51,38 @@ module.exports = {
     new InjectManifest({
       swSrc: path.resolve(__dirname, 'src/scripts/sw.js'),
     }),
+    new ImageminWebpackPlugin({
+      plugins: [
+        ImageminMozjpeg({
+          quality: 50,
+          progressive: true,
+        }),
+        ImageminPngquant({ quality: 50 }),
+      ],
+    }),
+    new BundleAnalyzerPlugin(),
   ],
-  resolve: {
-    alias: {
-      '@styles': path.resolve(__dirname, './src/styles'),
-      '@scripts': path.resolve(__dirname, './src/scripts'),
-      '@templates': path.resolve(__dirname, './src/templates'),
-      '@public': path.resolve(__dirname, './src/public'),
-      '@databases': path.resolve(__dirname, './src/databases'),
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minSize: 10000,
+      maxSize: 50000,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      automaticNameDelimiter: '~',
+      enforceSizeThreshold: 50000,
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
     },
   },
 };

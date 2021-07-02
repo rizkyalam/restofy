@@ -1,5 +1,4 @@
-/* eslint-disable import/no-unresolved */
-import config from '@scripts/configs';
+import config from './index';
 
 const api = {
   async getAllData() {

@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable class-methods-use-this */
-import UrlParser from '@scripts/routes/url-parser';
-import api from '@scripts/configs/api';
+import UrlParser from '../../../routes/url-parser';
+import api from '../../../configs/api';
 
 class ReviewDetail extends HTMLElement {
   constructor() {

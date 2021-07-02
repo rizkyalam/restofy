@@ -1,7 +1,7 @@
+/* eslint-disable consistent-return */
 /* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable import/no-unresolved */
 import { openDB } from 'idb';
-import config from '@scripts/configs';
+import config from './index';
 
 const dbPromise = openDB(config.dbName, config.dbVersion, {
   upgrade(database) {
@@ -14,9 +14,11 @@ const dbconfig = {
     return (await dbPromise).getAll(config.objectStoreName);
   },
   async getFavorite(id) {
+    if (!id) return;
     return (await dbPromise).get(config.objectStoreName, id);
   },
   async putFavorite(data) {
+    if (!data.id) return;
     return (await dbPromise).put(config.objectStoreName, data);
   },
   async deleteFavorite(id) {

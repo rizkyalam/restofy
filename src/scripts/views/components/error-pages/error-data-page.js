@@ -1,6 +1,5 @@
-/* eslint-disable import/no-unresolved */
 /* eslint-disable class-methods-use-this */
-import ErrorPage from '@scripts/views/components/error-pages';
+import ErrorPage from './index';
 
 class ErrorDataPage extends ErrorPage {
   connectedCallback() {

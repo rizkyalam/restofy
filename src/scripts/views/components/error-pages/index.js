@@ -4,7 +4,7 @@ class ErrorPage extends HTMLElement {
     return `
     <div class="error-page">
         <h2>${data.title}</h2>
-        <img src="/images/${data.img}" alt="">
+        <img class="lazyload" data-src="/images/${data.img}" alt="">
     </div>
     `;
   }

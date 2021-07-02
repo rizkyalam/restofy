@@ -1,10 +1,9 @@
-/* eslint-disable import/no-unresolved */
 /* eslint-disable no-shadow */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-plusplus */
 // eslint-disable-next-line import/no-unresolved
-import config from '@scripts/configs';
-import LoaderPage from '@scripts/views/components/loader-page';
+import config from '../../configs';
+import LoaderPage from './loader-page';
 
 class Explore extends HTMLElement {
   constructor() {
@@ -56,7 +55,11 @@ class Explore extends HTMLElement {
     return `
     <div class="list-card">
       <div class="list-card-header">
-        <img src="${config.apiImgUrlSmall + data.pictureId}" alt="${data.name} from ${data.city}">
+        <img 
+          class="lazyload" 
+          data-src="${config.apiImgUrlSmall + data.pictureId}" 
+          alt="${data.name} from ${data.city}"
+        >
       </div>
       <div class="list-card-body">
         <h3 class="list-card-title">${data.name}</h3>

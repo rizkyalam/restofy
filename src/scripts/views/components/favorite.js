@@ -1,8 +1,7 @@
-/* eslint-disable import/no-unresolved */
 /* eslint-disable class-methods-use-this */
-import config from '@scripts/configs';
-import dbconfig from '@scripts/configs/idb';
-import LoaderPage from '@scripts/views/components/loader-page';
+import config from '../../configs';
+import dbconfig from '../../configs/idb';
+import LoaderPage from './loader-page';
 
 class Favorite extends HTMLElement {
   async connectedCallback() {
@@ -38,7 +37,11 @@ class Favorite extends HTMLElement {
     return `
     <div class="list-card">
       <div class="list-card-header">
-        <img src="${config.apiImgUrlSmall + data.pictureId}" alt="${data.name} from ${data.city}">
+        <img 
+          class="lazyload" 
+          data-src="${config.apiImgUrlSmall + data.pictureId}" 
+          alt="${data.name} from ${data.city}"
+        >
       </div>
       <div class="list-card-body">
         <h3 class="list-card-title">${data.name}</h3>

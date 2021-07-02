@@ -17,9 +17,8 @@
         <div class="logo">
             Restofy
         </div>
-        <a href="#" id="menu-btn" aria-label="navigation-menu">
-            <i class="fas fa-align-right"></i>
-        </a>
+        <a href="#" id="menu-btn" aria-label="navigation-menu">&#9776;</a>
+        
         <ul>
             <li><a href="#/">Home</a></li>
             <li><a href="#/favorite">Favorite</a></li>
@@ -31,7 +30,10 @@
 
     <!-- Jumbotron -->
     <header class="jumbotron">
-        <img src="./images/heros/hero-image_2.jpg" width="450" alt="">
+        <picture>
+            <source media="(max-width: 600px)" srcset="./images/heros/hero-image_2-small.jpg">
+            <img src="./images/heros/hero-image_2-large.jpg" alt="">
+        </picture>
         <div class="content">
             <h1>Welcome to Restofy</h1>
             <p>Good Food Makes Your Life Feel Better</p>

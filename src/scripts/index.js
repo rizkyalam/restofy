@@ -3,26 +3,21 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/no-unresolved */
 import 'regenerator-runtime'; /* for async await transpile */
-import '@styles/app.scss';
-import App from '@scripts/views/app';
-import { library, dom } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-import { far } from '@fortawesome/free-regular-svg-icons';
-import { fab } from '@fortawesome/free-brands-svg-icons';
-import swRegister from '@scripts/configs/sw-register';
-import notification from '@scripts/configs/notification';
+import '../styles/app.scss';
+import App from './views/app';
+import swRegister from './configs/sw-register';
+import notification from './configs/notification';
+import 'lazysizes';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 
 const app = new App({
   content: '#maincontent',
 });
 
-library.add(fas, far, fab);
-dom.i2svg();
-
 document.addEventListener('DOMContentLoaded', () => {
   app.renderPage();
   swRegister();
-  notification._requestPermission()();
+  notification._requestPermission();
 });
 
 window.addEventListener('hashchange', () => {
