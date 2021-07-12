@@ -45,4 +45,7 @@ Scenario('Unliking a restaurant', async ({ I }) => {
   // Remove from favorite
   I.seeElement('.detail-favorite');
   I.click('.detail-favorite');
+
+  I.amOnPage('/#/favorite');
+  I.seeElement('error-data');
 });

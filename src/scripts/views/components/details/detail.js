@@ -10,13 +10,13 @@ import { restaurant } from '../../../../databases/detail.json';
 class Detail extends HTMLElement {
   async connectedCallback() {
     try {
-      this.id = UrlParser.getUrlId();
       const mode = this.getAttribute('data-mode');
+      this.id = mode === 'testing' ? restaurant.id : UrlParser.getUrlId();
       const data = mode === 'testing' ? restaurant : await api.getDetailData(this.id);
       this.innerHTML = this.renderElm(data);
+      this.favoriteRestaurant(data);
       this.showMenus(data, 'foods');
       this.showMenus(data, 'drinks');
-      this.favoriteRestaurant(data);
       this.showCategories(data);
       this.toggleCategories();
       LoaderPage.removeLoader();
@@ -73,6 +73,8 @@ class Detail extends HTMLElement {
             </div>
           </div>
         </div>
+
+        <button class="detail-favorite"></button>
       </div>
       <detail-review></detail-review>
       <div class="explore-restaurant">
@@ -112,24 +114,17 @@ class Detail extends HTMLElement {
   }
 
   async favoriteRestaurant(apiData) {
-    const detailCardBody = document.querySelector('.detail-card-body');
     const dataFavorite = await dbconfig.getFavorite(this.id);
 
     if (dataFavorite) {
-      detailCardBody.appendChild(this.removeFromFavorite(apiData));
+      this.removeFromFavorite(apiData);
     } else {
-      detailCardBody.appendChild(this.addToFavorite(apiData));
+      this.addToFavorite(apiData);
     }
   }
 
-  btnFavorite() {
-    const btn = document.createElement('button');
-    btn.classList.add('detail-favorite');
-    return btn;
-  }
-
   addToFavorite(data) {
-    const btn = this.btnFavorite();
+    const btn = this.querySelector('.detail-favorite');
     btn.classList.remove('delete');
     btn.classList.add('insert');
     btn.innerText = 'Add To Favorite';
@@ -143,7 +138,7 @@ class Detail extends HTMLElement {
   }
 
   removeFromFavorite(data) {
-    const btn = this.btnFavorite();
+    const btn = this.querySelector('.detail-favorite');
     btn.classList.remove('insert');
     btn.classList.add('delete');
     btn.innerText = 'Delete From Favorite';

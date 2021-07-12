@@ -3,33 +3,28 @@ import { restaurant } from '../src/databases/detail.json';
 import dbconfig from '../src/scripts/configs/idb';
 
 describe('Unliking a Restaurant', () => {
-  customElements.define('detail-restaurant', Detail);
-
-  const detail = new Detail();
+  if (!customElements.get('detail-restaurant')) {
+    customElements.define('detail-restaurant', Detail);
+  }
 
   const container = () => {
     document.body.innerHTML = '<detail-restaurant data-mode="testing"></detail-restaurant>';
   };
 
-  const btnFavorite = () => {
-    document.querySelector('.detail-card-body')
-      .appendChild(detail.removeFromFavorite(restaurant));
-  };
-
   beforeEach(async () => {
-    await dbconfig.putFavorite(restaurant);
-    container();
-    btnFavorite();
-  });
+    const datadb = await dbconfig.getFavorite(restaurant.id);
 
-  afterEach(async () => {
-    await dbconfig.deleteFavorite(restaurant.id);
+    if (!datadb) {
+      await dbconfig.putFavorite(restaurant);
+    }
+
+    container();
   });
 
   it(
     'should display unlike widget when the restaurant has been liked',
     async () => {
-      expect(document.querySelector('button.detail-favorite.delete'))
+      expect(document.querySelector('button.detail-favorite'))
         .toBeTruthy();
     },
   );
@@ -43,8 +38,10 @@ describe('Unliking a Restaurant', () => {
   );
 
   it('should be able to remove liked restaurant from the list', async () => {
-    document.querySelector('button.detail-favorite.delete')
+    document.querySelector('button.detail-favorite')
       .dispatchEvent(new Event('click'));
+
+    await dbconfig.deleteFavorite(restaurant.id);
 
     expect(await dbconfig.getAllFavorites()).toEqual([]);
   });

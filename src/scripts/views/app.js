@@ -13,6 +13,7 @@ import ReviewDetail from './components/details/review';
 import Alert from './components/alert';
 import Favorite from './components/favorite';
 
+// define the custom elements
 customElements.define('explore-restaurant', Explore);
 customElements.define('form-reservations', Reservations);
 customElements.define('detail-restaurant', Detail);
